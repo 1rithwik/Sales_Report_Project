@@ -1,0 +1,240 @@
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+  }
+  
+  .login-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    transition: transform 0.3s ease;
+  }
+  
+  .login-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .login-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .login-header h2 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .login-header p {
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+  }
+  
+  .input-container {
+    position: relative;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px 40px 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s;
+    outline: none;
+  }
+  
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+  }
+  
+  input.error {
+    border-color: #ff5252;
+  }
+  
+  .icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+  }
+  
+  .clickable {
+    cursor: pointer;
+  }
+  
+  .error-message {
+    color: #ff5252;
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: 500;
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 12px;
+    background: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .login-button:hover {
+    background: #5048e5;
+  }
+  
+  .login-button:disabled {
+    background: #b3b3b3;
+    cursor: not-allowed;
+  }
+
+  /* Responsive styles */
+@media screen and (max-width: 480px) {
+  .login-container {
+    padding: 15px;
+    width: 100%;
+    position: relative;
+    top: 50px;
+    transform: translate(-50%, 0);
+  }
+
+  .login-card {
+    padding: 20px;
+  }
+
+  .login-header h2 {
+    font-size: 20px;
+  }
+
+  .login-header p {
+    font-size: 13px;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    padding: 10px 35px 10px 12px;
+    font-size: 16px; /* Larger font size for mobile inputs */
+  }
+
+  .icon {
+    right: 10px;
+  }
+
+  .icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .login-button {
+    padding: 10px;
+    font-size: 15px;
+  }
+}
+
+/* For very small screens */
+@media screen and (max-width: 320px) {
+  .login-container {
+    width: 100%;
+  }
+
+  .login-card {
+    padding: 15px;
+  }
+
+  .login-header h2 {
+    font-size: 18px;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    padding: 8px 30px 8px 10px;
+  }
+}
+
+/* For tablets and landscape phones */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .login-container {
+    max-width: 450px;
+  }
+}
+
+/* For high-DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .login-card {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* For landscape orientation on mobile */
+@media screen and (max-height: 480px) and (orientation: landscape) {
+  .login-container {
+    position: relative;
+    top: 0;
+    transform: translateX(-50%);
+    margin: 20px auto;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .login-card {
+    background: #2d2d2d;
+  }
+
+  .login-header h2 {
+    color: #fff;
+  }
+
+  .login-header p {
+    color: #bbb;
+  }
+
+  label {
+    color: #ddd;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    background: #3d3d3d;
+    border-color: #4d4d4d;
+    color: #fff;
+  }
+
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.3);
+  }
+
+  .icon {
+    color: #aaa;
+  }
+}

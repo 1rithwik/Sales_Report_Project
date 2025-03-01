@@ -1,0 +1,178 @@
+<div class="home-container">
+  <div class="side-panel">
+    <button (click)="toggleForm()">Show Form</button>
+    <button (click)="toggleTable()">Show Table</button>
+    <button (click)="logout()">Log Out</button>
+  </div>
+
+  <div class="content">
+    <div *ngIf="showForm" class="form-container">
+      <h2>Enter Details</h2>
+      <form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+        <div class="form-group radio-group">
+          <label>
+            <input type="radio" 
+                   formControlName="dataType" 
+                   value="purchase"
+                   name="dataType" 
+                   (change)="onDataTypeChange($event)"> Purchase
+          </label>
+          <label>
+            <input type="radio" 
+                   formControlName="dataType" 
+                   value="sales"
+                   name="dataType" 
+                   (change)="onDataTypeChange($event)"> Sales
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="date">Date:</label>
+          <input id="date" type="date" formControlName="date">
+        </div>
+
+        <div class="form-group">
+          <label for="invoiceNo">Invoice No:</label>
+          <input id="invoiceNo" type="text" formControlName="invoiceNo">
+        </div>
+
+        <div class="form-group">
+          <label for="taxableAmt28">Taxable Amount (28%):</label>
+          <input id="taxableAmt28" type="number" formControlName="taxableAmt28">
+        </div>
+
+        <div class="form-group">
+          <label for="taxableAmt18">Taxable Amount (18%):</label>
+          <input id="taxableAmt18" type="number" formControlName="taxableAmt18">
+        </div>
+
+        <div class="form-group" *ngIf="dataType === 'purchase'">
+          <label for="tcs">TCS &#64;0.100%:</label>
+          <input id="tcs" type="number" formControlName="tcs">
+        </div>
+        
+        <div class="form-group" *ngIf="dataType === 'sales'">
+          <label for="igst28">IGST &#64;28%:</label>
+          <input id="igst28" type="number" formControlName="igst28">
+        </div>
+
+        <div class="form-group">
+          <label for="cgst14">CGST &#64;14%:</label>
+          <input id="cgst14" type="number" formControlName="cgst14">
+        </div>
+
+        <div class="form-group">
+          <label for="cgst9">CGST &#64;9%:</label>
+          <input id="cgst9" type="number" formControlName="cgst9">
+        </div>
+
+        <div class="form-group">
+          <label for="sgst14">SGST &#64;14%:</label>
+          <input id="sgst14" type="number" formControlName="sgst14">
+        </div>
+
+        <div class="form-group">
+          <label for="sgst9">SGST &#64;9%:</label>
+          <input id="sgst9" type="number" formControlName="sgst9">
+        </div>
+
+        <div class="form-group">
+          <label for="total">Total:</label>
+          <input id="total" type="number" formControlName="total">
+          <button type="button" (click)="calculateTotal()" style="margin-left: 10px;">Calculate Total</button>
+        </div>
+
+        <div class="form-group">
+          <label for="partyName">Party Name:</label>
+          <input id="partyName" type="text" formControlName="partyName">
+        </div>
+
+        <div class="form-group">
+          <label for="gstNo">GST No:</label>
+          <input id="gstNo" type="text" formControlName="gstNo">
+        </div>
+
+        <button type="submit" [disabled]="!dataForm.valid">Save</button>
+      </form>
+    </div>
+
+    <div *ngIf="showTable" class="table-container">
+      <div *ngIf="purchaseData.length > 0">
+        <h2>Purchase Data</h2>
+        <table *ngIf="purchaseData.length > 0">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>INV.NO</th>
+              <th>Taxable Amt 28%</th>
+              <th>Taxable Amt 18%</th>
+              <th>TCS &#64;0.100%</th>
+              <th>CGST &#64;14%</th>
+              <th>CGST &#64;9%</th>
+              <th>SGST &#64;14%</th>
+              <th>SGST &#64;9%</th>
+              <th>Total</th>
+              <th>Party Name</th>
+              <th>GST NO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of purchaseData">
+              <td>{{data.date | date}}</td>
+              <td>{{data.invoiceNo}}</td>
+              <td>{{data.taxableAmt28 | number:'1.2-2'}}</td>
+              <td>{{data.taxableAmt18 | number:'1.2-2'}}</td>
+              <td>{{data.tcs | number:'1.2-2'}}</td>
+              <td>{{data.cgst14 | number:'1.2-2'}}</td>
+              <td>{{data.cgst9 | number:'1.2-2'}}</td>
+              <td>{{data.sgst14 | number:'1.2-2'}}</td>
+              <td>{{data.sgst9 | number:'1.2-2'}}</td>
+              <td>{{data.total | number:'1.2-2'}}</td>
+              <td>{{data.partyName}}</td>
+              <td>{{data.gstNo}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="salesData.length > 0">
+        <h2>Sales Data</h2>
+        <table *ngIf="salesData.length > 0">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>INV.NO</th>
+              <th>Taxable Amt 28%</th>
+              <th>Taxable Amt 18%</th>
+              <th>IGST &#64;28%</th>
+              <th>CGST &#64;14%</th>
+              <th>CGST &#64;9%</th>
+              <th>SGST &#64;14%</th>
+              <th>SGST &#64;9%</th>
+              <th>Total</th>
+              <th>Party Name</th>
+              <th>GST NO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of salesData">
+              <td>{{data.date | date}}</td>
+              <td>{{data.invoiceNo}}</td>
+              <td>{{data.taxableAmt28 | number:'1.2-2'}}</td>
+              <td>{{data.taxableAmt18 | number:'1.2-2'}}</td>
+              <td>{{data.igst28 | number:'1.2-2'}}</td>
+              <td>{{data.cgst14 | number:'1.2-2'}}</td>
+              <td>{{data.cgst9 | number:'1.2-2'}}</td>
+              <td>{{data.sgst14 | number:'1.2-2'}}</td>
+              <td>{{data.sgst9 | number:'1.2-2'}}</td>
+              <td>{{data.total | number:'1.2-2'}}</td>
+              <td>{{data.partyName}}</td>
+              <td>{{data.gstNo}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p *ngIf="purchaseData.length === 0 && salesData.length === 0">No data available</p>
+      <button *ngIf="purchaseData.length>0 || salesData.length>0" (click)="exportToExcel()" class="export-btn">Export to Excel</button>
+    </div>
+  </div>
+</div>
